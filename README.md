@@ -10,7 +10,7 @@ Here's the complete (desired) list of features. Checked items are the ones alrea
 
 - [ ] Base API with support for all of the Alpha Vantage API params but nothing else
 - [ ] Dedicated functions for Timeseries functions
-- [ ] Dedicated functions for Forex endpoints
+- [ ] Dedicated functions for Forex functions
 - [ ] Dedicated functions for the cryptocurrencies functions
 - [ ] Dedicated functions for the indicators functions
 - [ ] 'Watch' option for stocks
