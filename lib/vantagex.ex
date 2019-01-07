@@ -44,6 +44,7 @@ defmodule Vantagex do
           },
           ...
         }
+      }
   """
   @spec call_api(function :: String.t(), params :: Map.t()) :: term()
   def call_api(function, params) when function in @allowed_functions do
