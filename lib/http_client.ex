@@ -33,7 +33,7 @@ defmodule Vantagex.HttpClient do
   def get_data(params) do
     case get!(@endpoint, [], params: params) do
       %HTTPoison.Response{status_code: 200, body: body} ->
-        body
+        Jason.decode!(body)
       %HTTPoison.Response{status_code: status, body: body} ->
         if status >= 300 and status < 400, do: body, else: {:error, status}
       %HTTPoison.Error{reason: reason} ->
