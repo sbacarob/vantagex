@@ -9,10 +9,10 @@
 Here's the complete (desired) list of features. Checked items are the ones already implemented.
 
 - [x] Base API with support for all of the Alpha Vantage API params but nothing else
-- [ ] Dedicated functions for Timeseries functions
-- [ ] Dedicated functions for Forex functions
-- [ ] Dedicated functions for the cryptocurrencies functions
-- [ ] Dedicated functions for the indicators functions
+- [ ] Dedicated module for Timeseries functions
+- [ ] Dedicated module for Forex functions
+- [ ] Dedicated module for the cryptocurrencies functions
+- [ ] Dedicated module for the indicators functions
 - [ ] 'Watch' option for stocks
 
 ## Installation
