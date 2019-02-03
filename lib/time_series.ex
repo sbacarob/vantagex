@@ -33,9 +33,7 @@ defmodule Vantagex.TimeSeries do
       datatype: Keyword.get(opts, :datatype)
     } |> clean_params
 
-    :intraday
-    |> get_function_name()
-    |> Vantagex.call_api(params)
+    resolve_request(:intraday, params)
   end
 
   @doc """
@@ -64,9 +62,7 @@ defmodule Vantagex.TimeSeries do
       datatype: Keyword.get(opts, :datatype)
     } |> clean_params
 
-    :daily
-    |> get_function_name()
-    |> Vantagex.call_api(params)
+    resolve_request(:daily, params)
   end
 
   @doc """
@@ -95,15 +91,19 @@ defmodule Vantagex.TimeSeries do
       datatype: Keyword.get(opts, :datatype)
     } |> clean_params
 
-    :daily
-    |> get_function_name()
-    |> Vantagex.call_api(params)
+    resolve_request(:daily_adjusted, params)
   end
 
   defp clean_params(params) do
     params
     |> Enum.reject(&(is_nil(elem(&1, 1))))
     |> Map.new()
+  end
+
+  defp resolve_request(function, params) do
+    function
+    |> get_function_name()
+    |> Vantagex.call_api(params)
   end
 
   defp get_function_name(function) do
