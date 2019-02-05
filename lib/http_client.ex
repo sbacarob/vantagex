@@ -18,8 +18,22 @@ defmodule Vantagex.HttpClient do
   * `params` - The params that come from the request.
   """
   @spec process_request_params(map) :: map
+  def process_request_params(%{datatype: :map} = params) do
+    params
+    |> Map.delete(:datatype)
+    |> Map.merge(%{as_map: true, apikey: get_api_key()})
+  end
+
+  def process_request_params(%{datatype: datatype} = params) do
+    %{
+      params | datatype: to_string(datatype)
+    } |> Map.merge(%{apikey: get_api_key()})
+  end
+
   def process_request_params(params) do
-    params |> Map.merge(%{apikey: get_api_key()})
+    params
+    |> Map.merge(%{datatype: :map})
+    |> process_request_params()
   end
 
   @doc """
@@ -32,8 +46,8 @@ defmodule Vantagex.HttpClient do
   @spec get_data(Map.t()) :: binary
   def get_data(params) do
     case get!(@endpoint, [], params: params) do
-      %HTTPoison.Response{status_code: 200, body: body} ->
-        Jason.decode!(body)
+      %HTTPoison.Response{status_code: 200, body: body, request: %{params: p}} ->
+        if p[:as_map], do: Jason.decode!(body), else: body
       %HTTPoison.Response{status_code: status, body: body} ->
         if status >= 300 and status < 400, do: body, else: {:error, status}
       %HTTPoison.Error{reason: reason} ->

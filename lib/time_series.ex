@@ -19,10 +19,7 @@ defmodule Vantagex.TimeSeries do
 
   * `outputsize` - `:compact | :full` when set to compact returns the latest 100
   datapoints; when set to full returns the full length intraday time series. Defaults to compact
-  * `datatype` - `:json | :csv` specifies the return format. Defaults to JSON
-  * `as_map` - `true | false`. If set to true, returns the data as an Elixir Map,
-  otherwise the response will be the response body as plain text. Works with `:json`
-  datatype. Defaults to `false`
+  * `datatype` - `:map | :json | :csv` specifies the return format. Defaults to :map
   """
   @spec intraday(String.t(), integer(), Keyword.t()) :: String.t() | Map.t()
   def intraday(symbol, interval, opts \\ []) do
