@@ -3,8 +3,9 @@ defmodule Vantagex do
   Documentation for Vantagex.
   """
   alias Vantagex.HttpClient
-  @allowed_params Application.get_env(:vantagex, :allowed_params)
-  @allowed_functions Application.get_env(:vantagex, :allowed_functions)
+  alias Vantagex.Config
+  @allowed_params Config.allowed_params
+  @allowed_functions Config.allowed_functions
 
   @doc """
   Call Alpha Vantage API.

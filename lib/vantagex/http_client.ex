@@ -6,8 +6,9 @@ defmodule Vantagex.HttpClient do
   """
 
   use HTTPoison.Base
+  alias Vantagex.Config
 
-  @endpoint Application.get_env(:vantagex, :api_url)
+  @endpoint Config.api_url
 
   @doc """
   From HTTPoison.Base. Processes the given params.
