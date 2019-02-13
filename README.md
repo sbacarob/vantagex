@@ -17,6 +17,8 @@ Here's the complete (desired) list of features. Checked items are the ones alrea
 
 ## Installation
 
+First, add :vantagex to your deps list in your `mix.exs` file
+
 ```elixir
 def deps do
   [
@@ -24,6 +26,17 @@ def deps do
   ]
 end
 ```
+
+Then, make sure to add your Alpha Vantage API key to your config files `config.exs` or environment specific, like `dev.exs`
+
+> If you don't have an Alpha Vantage API key, you can get one for free [here](https://www.alphavantage.co/support/#api-key)
+
+```elixir
+config :vantagex,
+  api_key: "YOUR_API_KEY"
+```
+
+Finally run `$ mix deps.get` and you should be good to go.
 
 ## Time Series functions
 
