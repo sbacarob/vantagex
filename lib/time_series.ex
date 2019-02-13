@@ -66,7 +66,7 @@ defmodule Vantagex.TimeSeries do
       interval: "#{interval}min",
       outputsize: Keyword.get(opts, :outputsize),
       datatype: Keyword.get(opts, :datatype)
-    } |> clean_params
+    } |> clean_params()
 
     resolve_request(:intraday, params)
   end
@@ -122,7 +122,7 @@ defmodule Vantagex.TimeSeries do
       symbol: symbol,
       outputsize: Keyword.get(opts, :outputsize),
       datatype: Keyword.get(opts, :datatype)
-    } |> clean_params
+    } |> clean_params()
 
     resolve_request(:daily, params)
   end
@@ -184,7 +184,7 @@ defmodule Vantagex.TimeSeries do
       symbol: symbol,
       outputsize: Keyword.get(opts, :outputsize),
       datatype: Keyword.get(opts, :datatype)
-    } |> clean_params
+    } |> clean_params()
 
     resolve_request(:daily_adjusted, params)
   end
@@ -237,7 +237,7 @@ defmodule Vantagex.TimeSeries do
       symbol: symbol,
       outputsize: Keyword.get(opts, :outputsize),
       datatype: Keyword.get(opts, :datatype)
-    } |> clean_params
+    } |> clean_params()
 
     resolve_request(:weekly, params)
   end
@@ -294,7 +294,7 @@ defmodule Vantagex.TimeSeries do
       symbol: symbol,
       outputsize: Keyword.get(opts, :outputsize),
       datatype: Keyword.get(opts, :datatype)
-    } |> clean_params
+    } |> clean_params()
 
     resolve_request(:weekly_adjusted, params)
   end
@@ -347,7 +347,7 @@ defmodule Vantagex.TimeSeries do
       symbol: symbol,
       outputsize: Keyword.get(opts, :outputsize),
       datatype: Keyword.get(opts, :datatype)
-    } |> clean_params
+    } |> clean_params()
 
     resolve_request(:monthly, params)
   end
@@ -404,9 +404,53 @@ defmodule Vantagex.TimeSeries do
       symbol: symbol,
       outputsize: Keyword.get(opts, :outputsize),
       datatype: Keyword.get(opts, :datatype)
-    } |> clean_params
+    } |> clean_params()
 
     resolve_request(:monthly_adjusted, params)
+  end
+
+  @doc """
+  Uses Alpha Vantage's `GLOBAL_QUOTE` function.
+  Returns the latest price and volume information for a given security.
+
+  Args:
+
+  * `symbol` - The symbol of the security to use. E.g. `MSFT`
+  * `opts` - A list of extra options to pass to the function.
+
+  Allowed options:
+
+  * `datatype` - `:map | :json | :csv` specifies the return format. Defaults to :map
+
+  ## Examples:
+
+      iex> Vantagex.TimeSeries.quote("GOOG")
+      %{
+        "Global Quote" => %{
+          "01. symbol" => "GOOG",
+          "02. open" => "1106.8000",
+          "03. high" => "1125.3000",
+          "04. low" => "1105.9001",
+          "05. price" => "1121.3700",
+          "06. volume" => "347",
+          "07. latest trading day" => "2019-02-12",
+          "08. previous close" => "1095.0100",
+          "09. change" => "26.3600",
+          "10. change percent" => "2.4073%"
+        }
+      }
+
+      iex> Vantagex.TimeSeries.quote("GOOG", datatype: :csv)
+      "symbol,open,high,low,price,volume,latestDay,previousClose,change,changePercent\\r\\nGOOG,1106.8000,1125.3000,1105.9001,1121.3700,347,2019-02-12,1095.0100,26.3600,2.4073%\\r\\n"
+  """
+  @spec quote(String.t(), Keyword.t()) :: String.t() | Map.t()
+  def quote(symbol, opts \\ []) do
+    params = %{
+      symbol: symbol,
+      datatype: Keyword.get(opts, :datatype)
+    } |> clean_params()
+
+    resolve_request(:global_quote, params)
   end
 
   defp clean_params(params) do
@@ -426,6 +470,9 @@ defmodule Vantagex.TimeSeries do
           |> to_string()
           |> String.upcase()
 
-    "#{@module_id}_#{key}"
+    add_group_prefix(function, key)
   end
+
+  defp add_group_prefix(:global_quote, key), do: key
+  defp add_group_prefix(_function, key), do: "#{@module_id}_#{key}"
 end
