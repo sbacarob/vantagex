@@ -453,6 +453,60 @@ defmodule Vantagex.TimeSeries do
     resolve_request(:global_quote, params)
   end
 
+  @doc """
+  Uses Alpha Vantage's `SYMBOL_SEARCH` function.
+  Returns the best-matching symbols based on the passed keywords.
+
+  Args:
+
+  * `keywords` - A text string to search for. e.g. `"microsoft"`
+  * `opts` - A list of extra options to pass to the function.
+
+  Allowed options:
+
+  * `datatype` - `:map | :json | :csv` specifies the return format. Defaults to :map
+
+  ## Examples
+
+      iex> Vantagex.TimeSeries.symbol_search("microsoft")
+      %{
+        "bestMatches" => [
+          %{
+            "1. symbol" => "MSFT",
+            "2. name" => "Microsoft Corporation",
+            "3. type" => "Equity",
+            "4. region" => "United States",
+            "5. marketOpen" => "09:30",
+            "6. marketClose" => "16:00",
+            "7. timezone" => "UTC-05",
+            "8. currency" => "USD",
+            "9. matchScore" => "1.0000"
+          },
+          %{
+            "1. symbol" => "MSFT.MEX",
+            "2. name" => "Microsoft Corporation",
+            "3. type" => "Equity",
+            "4. region" => "Mexico",
+            "5. marketOpen" => "08:30",
+            "6. marketClose" => "15:00",
+            "7. timezone" => "UTC-06",
+            "8. currency" => "MXP",
+            "9. matchScore" => "0.6154"
+          },
+          ...
+        ]
+      }
+  """
+  @spec symbol_search(String.t(), Keyword.t()) :: String.t() | Map.t()
+  def symbol_search(keywords, opts \\ []) do
+    params = %{
+      keywords: keywords,
+      datatype: Keyword.get(opts, :datatype)
+    } |> clean_params()
+
+    resolve_request(:symbol_search, params)
+  end
+
   defp clean_params(params) do
     params
     |> Enum.reject(&(is_nil(elem(&1, 1))))
@@ -473,6 +527,6 @@ defmodule Vantagex.TimeSeries do
     add_group_prefix(function, key)
   end
 
-  defp add_group_prefix(:global_quote, key), do: key
-  defp add_group_prefix(_function, key), do: "#{@module_id}_#{key}"
+  defp add_group_prefix(f, key) when f in [:global_quote, :symbol_search], do: key
+  defp add_group_prefix(_f, key), do: "#{@module_id}_#{key}"
 end
