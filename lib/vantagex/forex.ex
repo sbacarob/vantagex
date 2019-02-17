@@ -50,6 +50,60 @@ defmodule Vantagex.Forex do
     resolve_request(:currency_exchange_rate, params)
   end
 
+  @doc """
+  Uses Alpha Vantage `FX_INTRADAY` function.
+  Returns intraday time series of the FX currency pair specified
+
+  Args:
+
+  * `from_symbol` - three letter string representing the currency. e.g. `"EUR"`
+  * `to_symbol` - three letter string representing the currency. e.g. `"USD"`
+  * `interval` - an integer representing the time interval between data points of the time series. e.g. `5`
+  * `opts` - A list of extra options to pass to the function.
+
+  Allowed options:
+
+  * `outputsize` - `:compact | :full` when set to compact returns the latest 100
+  datapoints; when set to full returns the full length intraday time series. Defaults to compact
+  * `datatype` - `:map | :json | :csv` specifies the return format. Defaults to :map
+
+  ## Examples
+
+      iex> Vantagex.Forex.intraday("USD", "COP", 5)
+      %{
+        "Meta Data" => %{
+          "1. Information" => "FX Intraday (5min) Time Series",
+          "2. From Symbol" => "USD",
+          "3. To Symbol" => "COP",
+          "4. Last Refreshed" => "2019-02-17 22:40:00",
+          "5. Interval" => "5min",
+          "6. Output Size" => "Compact",
+          "7. Time Zone" => "UTC"
+        },
+        "Time Series FX (5min)" => %{
+          "2019-02-17 17:45:00" => %{
+            "1. open" => "3130.0000",
+            "2. high" => "3130.0000",
+            "3. low" => "3130.0000",
+            "4. close" => "3130.0000"
+          },
+          ...
+        }
+      }
+  """
+  @spec intraday(String.t(), String.t(), integer(), Keyword.t()) :: Map.t() | String.t()
+  def intraday(from_symbol, to_symbol, interval, opts \\ []) do
+    params = %{
+      from_symbol: from_symbol,
+      to_symbol: to_symbol,
+      interval: "#{interval}min",
+      outputsize: Keyword.get(opts, :outputsize),
+      datatype: Keyword.get(opts, :datatype)
+    } |> clean_params()
+
+    resolve_request(:intraday, params)
+  end
+
   defp clean_params(params) do
     params
     |> Enum.reject(&(is_nil(elem(&1, 1))))
