@@ -217,6 +217,62 @@ defmodule Vantagex.Forex do
     resolve_request(:weekly, params)
   end
 
+  @doc """
+  Uses Alpha Vantage's `FX_MONTHLY` function
+  Returns the monthly time series of the FX currency pair specified.
+
+  Args:
+
+  * `from_symbol` - three letter string representing the currency. e.g. `"EUR"`
+  * `to_symbol` - three letter string representing the currency. e.g. `"USD"`
+  * `opts` - A list of extra options to pass to the function.
+
+  Allowed options:
+
+  * `outputsize` - `:compact | :full` when set to compact returns the latest 100
+  datapoints; when set to full returns the full length intraday time series. Defaults to compact
+  * `datatype` - `:map | :json | :csv` specifies the return format. Defaults to :map
+
+  ## Examples
+
+      iex> Vantagex.Forex.monthly("EUR", "USD")
+      %{
+        "Meta Data" => %{
+          "1. Information" => "Forex Monthly Prices (open, high, low, close)",
+          "2. From Symbol" => "EUR",
+          "3. To Symbol" => "USD",
+          "4. Last Refreshed" => "2019-02-19 07:10:00",
+          "5. Time Zone" => "GMT+8"
+        },
+        "Time Series FX (Monthly)" => %{
+          "2011-06-30" => %{
+            "1. open" => "1.4412",
+            "2. high" => "1.4696",
+            "3. low" => "1.4070",
+            "4. close" => "1.4491"
+          },
+          "2010-06-30" => %{
+            "1. open" => "1.2306",
+            "2. high" => "1.2467",
+            "3. low" => "1.1874",
+            "4. close" => "1.2234"
+          },
+          ...
+        }
+      }
+  """
+  @spec monthly(String.t(), String.t(), Keyword.t()) :: String.t() | Map.t()
+  def monthly(from_symbol, to_symbol, opts \\ []) do
+    params = %{
+      from_symbol: from_symbol,
+      to_symbol: to_symbol,
+      outputsize: Keyword.get(opts, :outputsize),
+      datatype: Keyword.get(opts, :datatype)
+    } |> clean_params()
+
+    resolve_request(:monthly, params)
+  end
+
   defp clean_params(params) do
     params
     |> Enum.reject(&(is_nil(elem(&1, 1))))
