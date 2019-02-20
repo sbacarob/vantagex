@@ -10,7 +10,7 @@ Here's the complete (desired) list of features. Checked items are the ones alrea
 
 - [x] Base API with support for all of the Alpha Vantage API params but nothing else
 - [x] Dedicated module for Timeseries functions
-- [ ] Dedicated module for Forex functions
+- [x] Dedicated module for Forex functions
 - [ ] Dedicated module for the cryptocurrencies functions
 - [ ] Dedicated module for the indicators functions
 - [ ] 'Watch' option for stocks
@@ -119,6 +119,44 @@ As you may notice, these functions return an Elixir Map. This is the default opt
 iex> Vantagex.TimeSeries.intraday("GOOG", 5, datatype: :csv)
 "timestamp,open,high,low,close,volume\r\n2019-02-04 16:00:00,1130.7800,1132.4301,1130.5000,1132.4301,122109\r\n2019-02-04 15:55:00,1129.9800,1130.7900,1129.3140,1130.4685,52596\r\n2019-02-04 15:50:00,1129.2600,1130.2520,1128.8500,1129.8600,50110\r\n2019-02-04 15:45:00,1126.7550,1129.4750,1126.7550,1129.4100,33314\r\n2019-02-04 15:40:00,1127.7600,1127.7600,1125.3700,1126.4900,42554\r\n2019-02-04 15:35:00,1130.2900,1130.2900,1127.7006,1127.7006,36706\r\n2019-02-04 15:30:00,1131.1500,1131.5450,1130.3400,1130.6600,17684\r\n2019-02-04 15:25:00,1131.5900,1132.0100,1130.6899,1130.9900,20110\r\n2019-02-04 15:20:00,1130.7800,1131.7999,1130.7130,1131.3280,19301\r\n2019-02-04 15:15:00,1129.8400,1131.5500,1129.8400,1130.5072,36392\r\n2019-02-04 15:10:00,1129.0200,1130.1187,1128.0400,1130.1187,25009\r\n2019-02-04 15:05:00,1129.9000,1129.9998,1128.9301,1129.1600,15658\r\n2019-02-04 15:00:00,1130.0000,1130.4399,1129.7700,1130.0699,21459\r\n2019-02-04 14:55:00,1128.5500,1129.9000,1128.5500,1129.9000,41086\r\n2019-02-04 14:50:00,1128.8400,1128.9718,1127.8025,1128.3900,14609\r\n2019-02-04 14:45:00,1127.6191,1129.0000,1127.6191,1128.5900,12154\r\n..."
 ```
+
+For more information, see the module's documentation.
+
+## Forex functions.
+
+You can call Alpha Vantage's forex functions using the `Vantagex.Forex` module
+
+```elixir
+iex> Vantagex.Forex.intraday("USD", "COP", 5)
+%{
+  "Meta Data" => %{
+    "1. Information" => "FX Intraday (5min) Time Series",
+    "2. From Symbol" => "USD",
+    "3. To Symbol" => "COP",
+    "4. Last Refreshed" => "2019-02-17 22:40:00",
+    "5. Interval" => "5min",
+    "6. Output Size" => "Compact",
+    "7. Time Zone" => "UTC"
+  },
+  "Time Series FX (5min)" => %{
+    "2019-02-17 17:45:00" => %{
+      "1. open" => "3130.0000",
+      "2. high" => "3130.0000",
+      "3. low" => "3130.0000",
+      "4. close" => "3130.0000"
+    },
+    ...
+  }
+}
+```
+
+These functions take two currencies (their ISO 4217 code. e.g. "USD"), as well as options to set
+datatype and outputsize, just like TimeSeries.
+
+The only function from `Vantagex.Forex` that requires an extra argument is `intraday/4`, which expects
+an integer that determines the interval in minutes, as shown in the example above.
+
+Output format works the same as TimeSeries.
 
 For more information, see the module's documentation.
 
