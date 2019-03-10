@@ -4,14 +4,14 @@
 
 [Alpha Vantage](https://alphavantage.co) offers free financial APIs in JSON and CSV formats, providing access to realtime and historical stock data. As well as forex and cryptocurrency feeds, and 50+ technical indicators.
 
-## List of features
+## Roadmap
 
 Here's the complete (desired) list of features. Checked items are the ones already implemented.
 
 - [x] Base API with support for all of the Alpha Vantage API params but nothing else
 - [x] Dedicated module for Timeseries functions
 - [x] Dedicated module for Forex functions
-- [ ] Dedicated module for the cryptocurrencies functions
+- [x] Dedicated module for the cryptocurrencies functions
 - [ ] Dedicated module for the indicators functions
 - [ ] 'Watch' option for stocks
 
