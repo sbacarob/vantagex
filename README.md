@@ -160,6 +160,55 @@ Output format works the same as TimeSeries.
 
 For more information, see the module's documentation.
 
+## Cryptocurrencies functions.
+
+You can call Alpha Vantage's cryptocurrencies functions using the `Vantagex.Cryptocurrencies` module
+
+```elixir
+iex> Vantagex.Cryptocurrencies.daily("BTC", "USD")
+%{
+  "Meta Data" => %{
+    "1. Information" => "Daily Prices and Volumes for Digital Currency",
+    "2. Digital Currency Code" => "BTC",
+    "3. Digital Currency Name" => "Bitcoin",
+    "4. Market Code" => "USD",
+    "5. Market Name" => "United States Dollar",
+    "6. Last Refreshed" => "2019-03-09 (end of day)",
+    "7. Time Zone" => "UTC"
+  },
+  "Time Series (Digital Currency Daily)" => %{
+    "2017-07-13" => %{
+      "1a. open (USD)" => "2397.70831714",
+      "1b. open (USD)" => "2397.70831714",
+      "2a. high (USD)" => "2429.55116636",
+      "2b. high (USD)" => "2429.55116636",
+      "3a. low (USD)" => "2329.24694466",
+      "3b. low (USD)" => "2329.24694466",
+      "4a. close (USD)" => "2353.72968273",
+      "4b. close (USD)" => "2353.72968273",
+      "5. volume" => "73837.90295505",
+      "6. market cap (USD)" => "173794463.89599040"
+    },
+    "2018-11-12" => %{
+      "1a. open (USD)" => "6404.47988049",
+      "1b. open (USD)" => "6404.47988049",
+      "2a. high (USD)" => "6435.95061677",
+      "2b. high (USD)" => "6435.95061677",
+      "3a. low (USD)" => "6359.81993277",
+      "3b. low (USD)" => "6359.81993277",
+      "4a. close (USD)" => "6375.86047086",
+      "4b. close (USD)" => "6375.86047086",
+      "5. volume" => "57756.07950395",
+      "6. market cap (USD)" => "368244704.26095134"
+    },
+  ...
+  }
+}
+```
+
+These functions take the digital or crypto currency and the market, as well as options to set
+datatype and outputsize, just like TimeSeries.
+
 ## Calling the general API function
 
 You can call the base API function, which should support all of the existing APIs provided by Alpha Vantage using `Vantagex.call_api`, like so:
