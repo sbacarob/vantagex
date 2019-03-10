@@ -23,7 +23,7 @@ defmodule Vantagex.Forex do
 
   ## Examples:
 
-      iex> Vantagex.Forex.currency_exchange_rate("USD", "COP")
+      iex> Vantagex.Forex.exchange_rate("USD", "COP")
       %{
         "Realtime Currency Exchange Rate" => %{
           "1. From_Currency Code" => "USD",
@@ -36,11 +36,11 @@ defmodule Vantagex.Forex do
         }
       }
 
-      iex> Vantagex.Forex.currency_exchange_rate("USD", "COP", datatype: :json)
+      iex> Vantagex.Forex.exchange_rate("USD", "COP", datatype: :json)
       "{\\n    \"Realtime Currency Exchange Rate\": {\\n        \"1. From_Currency Code\": \"USD\",\\n        \"2. From_Currency Name\": \"United States Dollar\",\\n        \"3. To_Currency Code\": \"COP\",\\n        \"4. To_Currency Name\": \"Colombian Peso\",\\n        \"5. Exchange Rate\": \"3130.00000000\",\\n        \"6. Last Refreshed\": \"2019-02-16 22:34:00\",\\n        \"7. Time Zone\": \"UTC\"\\n    }\\n}"
   """
-  @spec currency_exchange_rate(String.t(), String.t(), Keyword.t()) :: Map.t() | String.t()
-  def currency_exchange_rate(from_currency, to_currency, opts \\ []) do
+  @spec exchange_rate(String.t(), String.t(), Keyword.t()) :: Map.t() | String.t()
+  def exchange_rate(from_currency, to_currency, opts \\ []) do
     params = %{
       from_currency: from_currency,
       to_currency: to_currency,
