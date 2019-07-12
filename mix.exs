@@ -4,10 +4,13 @@ defmodule Vantagex.Mixfile do
   def project do
     [
       app: :vantagex,
-      version: "0.1.0",
+      version: "0.1.4",
+      description: "Elixir wrapper for Alpha Vantage API",
+      package: package(),
       elixir: "~> 1.7",
       start_permanent: Mix.env == :prod,
-      deps: deps()
+      deps: deps(),
+      source_url: "https://github.com/sbacarob/vantagex"
     ]
   end
 
@@ -15,6 +18,15 @@ defmodule Vantagex.Mixfile do
   def application do
     [
       extra_applications: [:logger]
+    ]
+  end
+
+  defp package do
+    [
+      licenses: ["MIT"],
+      links: %{
+        "GitHub" => "https://github.com/sbacarob/vantagex"
+      }
     ]
   end
 
