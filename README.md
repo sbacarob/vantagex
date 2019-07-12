@@ -1,6 +1,6 @@
 # Vantagex
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![Docs](https://img.shields.io/badge/api-docs-green.svg?style=flat)](https://hexdocs.pm/vantagex/0.1.4) [![Hex.pm Version](https://img.shields.io/hexpm/v/vantagex.svg?style=flat)](https://hex.pm/packages/vantagex)
 
 #### Elixir wrapper for Alpha Vantage API
 
@@ -24,7 +24,7 @@ First, add :vantagex to your deps list in your `mix.exs` file
 ```elixir
 def deps do
   [
-    {:vantagex, git: "https://github.com/sbacarob/vantagex.git"}
+    {:vantagex, "~> 0.1"}
   ]
 end
 ```
