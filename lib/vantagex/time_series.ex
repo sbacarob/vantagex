@@ -2,7 +2,9 @@ defmodule Vantagex.TimeSeries do
   @moduledoc """
   Contains functions related to the Timeseries functions of Alpha Vantage's API.
   """
-  alias Vantagex
+
+  import Vantagex.Helper
+
   @module_id "TIME_SERIES"
 
   @doc """
@@ -68,7 +70,7 @@ defmodule Vantagex.TimeSeries do
       datatype: Keyword.get(opts, :datatype)
     } |> clean_params()
 
-    resolve_request(:intraday, params)
+    resolve_request(:intraday, params, @module_id)
   end
 
   @doc """
@@ -124,7 +126,7 @@ defmodule Vantagex.TimeSeries do
       datatype: Keyword.get(opts, :datatype)
     } |> clean_params()
 
-    resolve_request(:daily, params)
+    resolve_request(:daily, params, @module_id)
   end
 
   @doc """
@@ -186,7 +188,7 @@ defmodule Vantagex.TimeSeries do
       datatype: Keyword.get(opts, :datatype)
     } |> clean_params()
 
-    resolve_request(:daily_adjusted, params)
+    resolve_request(:daily_adjusted, params, @module_id)
   end
 
   @doc """
@@ -239,7 +241,7 @@ defmodule Vantagex.TimeSeries do
       datatype: Keyword.get(opts, :datatype)
     } |> clean_params()
 
-    resolve_request(:weekly, params)
+    resolve_request(:weekly, params, @module_id)
   end
 
   @doc """
@@ -296,7 +298,7 @@ defmodule Vantagex.TimeSeries do
       datatype: Keyword.get(opts, :datatype)
     } |> clean_params()
 
-    resolve_request(:weekly_adjusted, params)
+    resolve_request(:weekly_adjusted, params, @module_id)
   end
 
   @doc """
@@ -349,7 +351,7 @@ defmodule Vantagex.TimeSeries do
       datatype: Keyword.get(opts, :datatype)
     } |> clean_params()
 
-    resolve_request(:monthly, params)
+    resolve_request(:monthly, params, @module_id)
   end
 
   @doc """
@@ -406,7 +408,7 @@ defmodule Vantagex.TimeSeries do
       datatype: Keyword.get(opts, :datatype)
     } |> clean_params()
 
-    resolve_request(:monthly_adjusted, params)
+    resolve_request(:monthly_adjusted, params, @module_id)
   end
 
   @doc """
@@ -506,27 +508,4 @@ defmodule Vantagex.TimeSeries do
 
     resolve_request(:symbol_search, params)
   end
-
-  defp clean_params(params) do
-    params
-    |> Enum.reject(&(is_nil(elem(&1, 1))))
-    |> Map.new()
-  end
-
-  defp resolve_request(function, params) do
-    function
-    |> get_function_name()
-    |> Vantagex.call_api(params)
-  end
-
-  defp get_function_name(function) do
-    key = function
-          |> to_string()
-          |> String.upcase()
-
-    add_group_prefix(function, key)
-  end
-
-  defp add_group_prefix(f, key) when f in [:global_quote, :symbol_search], do: key
-  defp add_group_prefix(_f, key), do: "#{@module_id}_#{key}"
 end
