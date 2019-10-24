@@ -16,16 +16,15 @@ defmodule Vantagex.TechnicalIndicators do
   You can pass in a number to specify minutes (e.g. 1 == "1min"), or specify the period with the
   strings known by Alpha Vantage `(:daily | :weekly | :monthly)`
   * `time_period` - Number of data points to calculate each moving average value. Should be a positive integer
+  * `series_type` - The desired price type in the time series. Four types are supported: `:close`, `:open`, `:high`, `:low`.
   * `opts` - A list of extra options to pass to the function
 
   Allowed options:
 
-  * `series_type` - The desired price type in the time series. Four types are supported: `:close`, `:open`, `:high`, `:low`.
-  Defaults to `:close`.
   * `datatype` - `:map | :json | :csv` specifies the return format. Defaults to :map
   """
-  def sma(symbol, interval, time_period, opts \\ []) do
-    type_1_function(:sma, symbol, interval, time_period, opts)
+  def sma(symbol, interval, time_period, series_type, opts \\ []) do
+    type_1_function(:sma, symbol, interval, time_period, series_type, opts)
   end
 
   @doc """
@@ -39,16 +38,15 @@ defmodule Vantagex.TechnicalIndicators do
   You can pass in a number to specify minutes (e.g. 1 == "1min"), or specify the period with the
   strings known by Alpha Vantage `(:daily | :weekly | :monthly)`
   * `time_period` - Number of data points to calculate each moving average value. Should be a positive integer
+  * `series_type` - The desired price type in the time series. Four types are supported: `:close`, `:open`, `:high`, `:low`.
   * `opts` - A list of extra options to pass to the function
 
   Allowed options:
 
-  * `series_type` - The desired price type in the time series. Four types are supported: `:close`, `:open`, `:high`, `:low`.
-  Defaults to `:close`.
   * `datatype` - `:map | :json | :csv` specifies the return format. Defaults to :map
   """
-  def ema(symbol, interval, time_period, opts \\ []) do
-    type_1_function(:ema, symbol, interval, time_period, opts)
+  def ema(symbol, interval, time_period, series_type, opts \\ []) do
+    type_1_function(:ema, symbol, interval, time_period, series_type, opts)
   end
 
   @doc """
@@ -62,16 +60,15 @@ defmodule Vantagex.TechnicalIndicators do
   You can pass in a number to specify minutes (e.g. 1 == "1min"), or specify the period with the
   strings known by Alpha Vantage `(:daily | :weekly | :monthly)`
   * `time_period` - Number of data points to calculate each moving average value. Should be a positive integer
+  * `series_type` - The desired price type in the time series. Four types are supported: `:close`, `:open`, `:high`, `:low`.
   * `opts` - A list of extra options to pass to the function
 
   Allowed options:
 
-  * `series_type` - The desired price type in the time series. Four types are supported: `:close`, `:open`, `:high`, `:low`.
-  Defaults to `:close`.
   * `datatype` - `:map | :json | :csv` specifies the return format. Defaults to :map
   """
-  def wma(symbol, interval, time_period, opts \\ []) do
-    type_1_function(:wma, symbol, interval, time_period, opts)
+  def wma(symbol, interval, time_period, series_type, opts \\ []) do
+    type_1_function(:wma, symbol, interval, time_period, series_type, opts)
   end
 
   @doc """
@@ -85,16 +82,15 @@ defmodule Vantagex.TechnicalIndicators do
   You can pass in a number to specify minutes (e.g. 1 == "1min"), or specify the period with the
   strings known by Alpha Vantage `(:daily | :weekly | :monthly)`
   * `time_period` - Number of data points to calculate each moving average value. Should be a positive integer
+  * `series_type` - The desired price type in the time series. Four types are supported: `:close`, `:open`, `:high`, `:low`.
   * `opts` - A list of extra options to pass to the function
 
   Allowed options:
 
-  * `series_type` - The desired price type in the time series. Four types are supported: `:close`, `:open`, `:high`, `:low`.
-  Defaults to `:close`.
   * `datatype` - `:map | :json | :csv` specifies the return format. Defaults to :map
   """
-  def dema(symbol, interval, time_period, opts \\ []) do
-    type_1_function(:dema, symbol, interval, time_period, opts)
+  def dema(symbol, interval, time_period, series_type, opts \\ []) do
+    type_1_function(:dema, symbol, interval, time_period, series_type, opts)
   end
 
   @doc """
@@ -108,22 +104,21 @@ defmodule Vantagex.TechnicalIndicators do
   You can pass in a number to specify minutes (e.g. 1 == "1min"), or specify the period with the
   strings known by Alpha Vantage `(:daily | :weekly | :monthly)`
   * `time_period` - Number of data points to calculate each moving average value. Should be a positive integer
+  * `series_type` - The desired price type in the time series. Four types are supported: `:close`, `:open`, `:high`, `:low`.
   * `opts` - A list of extra options to pass to the function
 
   Allowed options:
 
-  * `series_type` - The desired price type in the time series. Four types are supported: `:close`, `:open`, `:high`, `:low`.
-  Defaults to `:close`.
   * `datatype` - `:map | :json | :csv` specifies the return format. Defaults to :map
   """
-  def tema(symbol, interval, time_period, opts \\ []) do
-    type_1_function(:tema, symbol, interval, time_period, opts)
+  def tema(symbol, interval, time_period, series_type, opts \\ []) do
+    type_1_function(:tema, symbol, interval, time_period, series_type, opts)
   end
 
   @doc """
   Alias for TEMA. Check `tema/4` for documentation.
   """
-  def t3(symbol, interval, time_period, opts \\ []), do: tema(symbol, interval, time_period, opts)
+  def t3(symbol, interval, time_period, series_type, opts \\ []), do: tema(symbol, interval, time_period, series_type, opts)
 
   @doc """
   Uses Alpha Vantage's TRIMA function.
@@ -136,16 +131,15 @@ defmodule Vantagex.TechnicalIndicators do
   You can pass in a number to specify minutes (e.g. 1 == "1min"), or specify the period with the
   strings known by Alpha Vantage `(:daily | :weekly | :monthly)`
   * `time_period` - Number of data points to calculate each moving average value. Should be a positive integer
+  * `series_type` - The desired price type in the time series. Four types are supported: `:close`, `:open`, `:high`, `:low`.
   * `opts` - A list of extra options to pass to the function
 
   Allowed options:
 
-  * `series_type` - The desired price type in the time series. Four types are supported: `:close`, `:open`, `:high`, `:low`.
-  Defaults to `:close`.
   * `datatype` - `:map | :json | :csv` specifies the return format. Defaults to :map
   """
-  def trima(symbol, interval, time_period, opts \\ []) do
-    type_1_function(:trima, symbol, interval, time_period, opts)
+  def trima(symbol, interval, time_period, series_type, opts \\ []) do
+    type_1_function(:trima, symbol, interval, time_period, series_type, opts)
   end
 
   @doc """
@@ -159,16 +153,15 @@ defmodule Vantagex.TechnicalIndicators do
   You can pass in a number to specify minutes (e.g. 1 == "1min"), or specify the period with the
   strings known by Alpha Vantage `(:daily | :weekly | :monthly)`
   * `time_period` - Number of data points to calculate each moving average value. Should be a positive integer
+  * `series_type` - The desired price type in the time series. Four types are supported: `:close`, `:open`, `:high`, `:low`.
   * `opts` - A list of extra options to pass to the function
 
   Allowed options:
 
-  * `series_type` - The desired price type in the time series. Four types are supported: `:close`, `:open`, `:high`, `:low`.
-  Defaults to `:close`.
   * `datatype` - `:map | :json | :csv` specifies the return format. Defaults to :map
   """
-  def kama(symbol, interval, time_period, opts \\ []) do
-    type_1_function(:kama, symbol, interval, time_period, opts)
+  def kama(symbol, interval, time_period, series_type, opts \\ []) do
+    type_1_function(:kama, symbol, interval, time_period, series_type, opts)
   end
 
   @doc """
@@ -182,16 +175,41 @@ defmodule Vantagex.TechnicalIndicators do
   You can pass in a number to specify minutes (e.g. 1 == "1min"), or specify the period with the
   strings known by Alpha Vantage `(:daily | :weekly | :monthly)`
   * `time_period` - Number of data points to calculate each moving average value. Should be a positive integer
+  * `series_type` - The desired price type in the time series. Four types are supported: `:close`, `:open`, `:high`, `:low`.
   * `opts` - A list of extra options to pass to the function
 
   Allowed options:
 
-  * `series_type` - The desired price type in the time series. Four types are supported: `:close`, `:open`, `:high`, `:low`.
-  Defaults to `:close`.
   * `datatype` - `:map | :json | :csv` specifies the return format. Defaults to :map
   """
-  def rsi(symbol, interval, time_period, opts \\ []) do
-    type_1_function(:rsi, symbol, interval, time_period, opts)
+  def rsi(symbol, interval, time_period, series_type, opts \\ []) do
+    type_1_function(:rsi, symbol, interval, time_period, series_type, opts)
+  end
+
+  @doc """
+  Uses Alpha Vantage's RSI function.
+  Returns the relative strength index (RSI) values.
+
+  Args:
+
+  * `symbol` - The name of the security of your choice. E.g. `MSFT`
+  * `interval` - Interval between two consecutive data points in the time series.
+  You can pass in a number to specify minutes (e.g. 1 == "1min"), or specify the period with the
+  strings known by Alpha Vantage `(:daily | :weekly | :monthly)`
+  * `time_period` - Number of data points to calculate each moving average value. Should be a positive integer
+  * `series_type` - The desired price type in the time series. Four types are supported: `:close`, `:open`, `:high`, `:low`.
+  * `opts` - A list of extra options to pass to the function
+
+  Allowed options:
+
+  * `fastkperiod` - The time period of the fastk moving average. Positive integers are accepted.
+  * `fastdperiod` - The time period of the fastd moving average. Positive integers are accepted.
+  * `fastdmatype` - Moving average type for the fastd moving average. Integers 0-8 are accepted.
+  0 = SMA. 1 = EMA. 2 = WMA. 3 = DEMA. 4 = TEMA. 5 = TRIMA. 6 = T3. 7 = KAMA. 8 = MAMA
+  * `datatype` - `:map | :json | :csv` specifies the return format. Defaults to :map
+  """
+  def stochrsi(symbol, interval, time_period, series_type, opts \\ []) do
+    type_1_function(:stochrsi, symbol, interval, time_period, series_type, opts)
   end
 
   @doc """
@@ -212,7 +230,7 @@ defmodule Vantagex.TechnicalIndicators do
   * `datatype` - `:map | :json | :csv` specifies the return format. Defaults to :map
   """
   def willr(symbol, interval, time_period, opts \\ []) do
-    type_1_function(:willr, symbol, interval, time_period, opts)
+    type_2_function(:willr, symbol, interval, time_period, opts)
   end
 
   @doc """
@@ -233,7 +251,7 @@ defmodule Vantagex.TechnicalIndicators do
   * `datatype` - `:map | :json | :csv` specifies the return format. Defaults to :map
   """
   def adx(symbol, interval, time_period, opts \\ []) do
-    type_1_function(:adx, symbol, interval, time_period, opts)
+    type_2_function(:adx, symbol, interval, time_period, opts)
   end
 
   @doc """
@@ -254,7 +272,7 @@ defmodule Vantagex.TechnicalIndicators do
   * `datatype` - `:map | :json | :csv` specifies the return format. Defaults to :map
   """
   def adxr(symbol, interval, time_period, opts \\ []) do
-    type_1_function(:adxr, symbol, interval, time_period, opts)
+    type_2_function(:adxr, symbol, interval, time_period, opts)
   end
 
   @doc """
@@ -268,16 +286,15 @@ defmodule Vantagex.TechnicalIndicators do
   You can pass in a number to specify minutes (e.g. 1 == "1min"), or specify the period with the
   strings known by Alpha Vantage `(:daily | :weekly | :monthly)`
   * `time_period` - Number of data points to calculate each moving average value. Should be a positive integer
+  * `series_type` - The desired price type in the time series. Four types are supported: `:close`, `:open`, `:high`, `:low`.
   * `opts` - A list of extra options to pass to the function
 
   Allowed options:
 
-  * `series_type` - The desired price type in the time series. Four types are supported: `:close`, `:open`, `:high`, `:low`.
-  Defaults to `:close`.
   * `datatype` - `:map | :json | :csv` specifies the return format. Defaults to :map
   """
-  def mom(symbol, interval, time_period, opts \\ []) do
-    type_1_function(:mom, symbol, interval, time_period, opts)
+  def mom(symbol, interval, time_period, series_type, opts \\ []) do
+    type_1_function(:mom, symbol, interval, time_period, series_type, opts)
   end
 
   @doc """
@@ -295,12 +312,10 @@ defmodule Vantagex.TechnicalIndicators do
 
   Allowed options:
 
-  * `series_type` - The desired price type in the time series. Four types are supported: `:close`, `:open`, `:high`, `:low`.
-  Defaults to `:close`.
   * `datatype` - `:map | :json | :csv` specifies the return format. Defaults to :map
   """
   def cci(symbol, interval, time_period, opts \\ []) do
-    type_1_function(:cci, symbol, interval, time_period, opts)
+    type_2_function(:cci, symbol, interval, time_period, opts)
   end
 
   @doc """
@@ -314,16 +329,15 @@ defmodule Vantagex.TechnicalIndicators do
   You can pass in a number to specify minutes (e.g. 1 == "1min"), or specify the period with the
   strings known by Alpha Vantage `(:daily | :weekly | :monthly)`
   * `time_period` - Number of data points to calculate each moving average value. Should be a positive integer
+  * `series_type` - The desired price type in the time series. Four types are supported: `:close`, `:open`, `:high`, `:low`.
   * `opts` - A list of extra options to pass to the function
 
   Allowed options:
 
-  * `series_type` - The desired price type in the time series. Four types are supported: `:close`, `:open`, `:high`, `:low`.
-  Defaults to `:close`.
   * `datatype` - `:map | :json | :csv` specifies the return format. Defaults to :map
   """
-  def cmo(symbol, interval, time_period, opts \\ []) do
-    type_1_function(:cmo, symbol, interval, time_period, opts)
+  def cmo(symbol, interval, time_period, series_type, opts \\ []) do
+    type_1_function(:cmo, symbol, interval, time_period, series_type, opts)
   end
 
   @doc """
@@ -337,16 +351,15 @@ defmodule Vantagex.TechnicalIndicators do
   You can pass in a number to specify minutes (e.g. 1 == "1min"), or specify the period with the
   strings known by Alpha Vantage `(:daily | :weekly | :monthly)`
   * `time_period` - Number of data points to calculate each moving average value. Should be a positive integer
+  * `series_type` - The desired price type in the time series. Four types are supported: `:close`, `:open`, `:high`, `:low`.
   * `opts` - A list of extra options to pass to the function
 
   Allowed options:
 
-  * `series_type` - The desired price type in the time series. Four types are supported: `:close`, `:open`, `:high`, `:low`.
-  Defaults to `:close`.
   * `datatype` - `:map | :json | :csv` specifies the return format. Defaults to :map
   """
-  def roc(symbol, interval, time_period, opts \\ []) do
-    type_1_function(:roc, symbol, interval, time_period, opts)
+  def roc(symbol, interval, time_period, series_type, opts \\ []) do
+    type_1_function(:roc, symbol, interval, time_period, series_type, opts)
   end
 
   @doc """
@@ -360,16 +373,15 @@ defmodule Vantagex.TechnicalIndicators do
   You can pass in a number to specify minutes (e.g. 1 == "1min"), or specify the period with the
   strings known by Alpha Vantage `(:daily | :weekly | :monthly)`
   * `time_period` - Number of data points to calculate each moving average value. Should be a positive integer
+  * `series_type` - The desired price type in the time series. Four types are supported: `:close`, `:open`, `:high`, `:low`.
   * `opts` - A list of extra options to pass to the function
 
   Allowed options:
 
-  * `series_type` - The desired price type in the time series. Four types are supported: `:close`, `:open`, `:high`, `:low`.
-  Defaults to `:close`.
   * `datatype` - `:map | :json | :csv` specifies the return format. Defaults to :map
   """
-  def rocr(symbol, interval, time_period, opts \\ []) do
-    type_1_function(:rocr, symbol, interval, time_period, opts)
+  def rocr(symbol, interval, time_period, series_type, opts \\ []) do
+    type_1_function(:rocr, symbol, interval, time_period, series_type, opts)
   end
 
   @doc """
@@ -387,12 +399,10 @@ defmodule Vantagex.TechnicalIndicators do
 
   Allowed options:
 
-  * `series_type` - The desired price type in the time series. Four types are supported: `:close`, `:open`, `:high`, `:low`.
-  Defaults to `:close`.
   * `datatype` - `:map | :json | :csv` specifies the return format. Defaults to :map
   """
   def aroon(symbol, interval, time_period, opts \\ []) do
-    type_1_function(:aroon, symbol, interval, time_period, opts)
+    type_2_function(:aroon, symbol, interval, time_period, opts)
   end
 
   @doc """
@@ -410,12 +420,31 @@ defmodule Vantagex.TechnicalIndicators do
 
   Allowed options:
 
-  * `series_type` - The desired price type in the time series. Four types are supported: `:close`, `:open`, `:high`, `:low`.
-  Defaults to `:close`.
   * `datatype` - `:map | :json | :csv` specifies the return format. Defaults to :map
   """
   def aroonosc(symbol, interval, time_period, opts \\ []) do
-    type_1_function(:aroonosc, symbol, interval, time_period, opts)
+    type_2_function(:aroonosc, symbol, interval, time_period, opts)
+  end
+
+  @doc """
+  Uses Alpha Vantage's MFI function.
+  Returns the money flow index (MFI) values.
+
+  Args:
+
+  * `symbol` - The name of the security of your choice. E.g. `MSFT`
+  * `interval` - Interval between two consecutive data points in the time series.
+  You can pass in a number to specify minutes (e.g. 1 == "1min"), or specify the period with the
+  strings known by Alpha Vantage `(:daily | :weekly | :monthly)`
+  * `time_period` - Number of data points to calculate each MFI value. Should be a positive integer
+  * `opts` - A list of extra options to pass to the function
+
+  Allowed options:
+
+  * `datatype` - `:map | :json | :csv` specifies the return format. Defaults to :map
+  """
+  def mfi(symbol, interval, time_period, opts \\ []) do
+    type_2_function(:mfi, symbol, interval, time_period, opts)
   end
 
   @doc """
@@ -428,15 +457,16 @@ defmodule Vantagex.TechnicalIndicators do
   * `interval` - Interval between two consecutive data points in the time series.
   You can pass in a number to specify minutes (e.g. 1 == "1min"), or specify the period with the
   strings known by Alpha Vantage `(:daily | :weekly | :monthly)`
-  * `time_period` - Number of data points to calculate each moving average value. Should be a positive integer
+  * `time_period` - Number of data points to calculate each moving average value. Should be a positive integer.
+  * `series_type` - The desired price type in the time series. Four types are supported: `:close`, `:open`, `:high`, `:low`.
   * `opts` - A list of extra options to pass to the function
 
   Allowed options:
 
   * `datatype` - `:map | :json | :csv` specifies the return format. Defaults to :map
   """
-  def trix(symbol, interval, time_period, opts \\ []) do
-    type_1_function(:trix, symbol, interval, time_period, opts)
+  def trix(symbol, interval, time_period, series_type, opts \\ []) do
+    type_1_function(:trix, symbol, interval, time_period, series_type, opts)
   end
 
   @doc """
@@ -457,7 +487,7 @@ defmodule Vantagex.TechnicalIndicators do
   * `datatype` - `:map | :json | :csv` specifies the return format. Defaults to :map
   """
   def dx(symbol, interval, time_period, opts \\ []) do
-    type_1_function(:dx, symbol, interval, time_period, opts)
+    type_2_function(:dx, symbol, interval, time_period, opts)
   end
 
   @doc """
@@ -478,7 +508,7 @@ defmodule Vantagex.TechnicalIndicators do
   * `datatype` - `:map | :json | :csv` specifies the return format. Defaults to :map
   """
   def minus_di(symbol, interval, time_period, opts \\ []) do
-    type_1_function(:minus_di, symbol, interval, time_period, opts)
+    type_2_function(:minus_di, symbol, interval, time_period, opts)
   end
 
   @doc """
@@ -499,7 +529,7 @@ defmodule Vantagex.TechnicalIndicators do
   * `datatype` - `:map | :json | :csv` specifies the return format. Defaults to :map
   """
   def plus_di(symbol, interval, time_period, opts \\ []) do
-    type_1_function(:plus_di, symbol, interval, time_period, opts)
+    type_2_function(:plus_di, symbol, interval, time_period, opts)
   end
 
   @doc """
@@ -520,7 +550,7 @@ defmodule Vantagex.TechnicalIndicators do
   * `datatype` - `:map | :json | :csv` specifies the return format. Defaults to :map
   """
   def minus_dm(symbol, interval, time_period, opts \\ []) do
-    type_1_function(:minus_dm, symbol, interval, time_period, opts)
+    type_2_function(:minus_dm, symbol, interval, time_period, opts)
   end
 
   @doc """
@@ -541,7 +571,33 @@ defmodule Vantagex.TechnicalIndicators do
   * `datatype` - `:map | :json | :csv` specifies the return format. Defaults to :map
   """
   def plus_dm(symbol, interval, time_period, opts \\ []) do
-    type_1_function(:plus_dm, symbol, interval, time_period, opts)
+    type_2_function(:plus_dm, symbol, interval, time_period, opts)
+  end
+
+  @doc """
+  Uses Alpha Vantage's BBANDS function.
+  Returns the Bollinger bands (BBANDS) values.
+
+  Args:
+
+  * `symbol` - The name of the security of your choice. E.g. `MSFT`
+  * `interval` - Interval between two consecutive data points in the time series.
+  You can pass in a number to specify minutes (e.g. 1 == "1min"), or specify the period with the
+  strings known by Alpha Vantage `(:daily | :weekly | :monthly)`
+  * `time_period` - Number of data points to calculate each moving average value. Should be a positive integer.
+  * `series_type` - The desired price type in the time series. Four types are supported: `:close`, `:open`, `:high`, `:low`.
+  * `opts` - A list of extra options to pass to the function.
+
+  Allowed options:
+  * `series_type` - The desired price type in the time series. Four types are supported: `:close`, `:open`, `:high`, `:low`.
+  * `nbdevup` - The standard deviation multiplier of the upper band. Positive integers are accepted. Defaults to 2.
+  * `nbdevdn` - The standard deviation multiplier of the lower band. Positive integers are accepted. Defaults to 2.
+  * `matype` - Moving average type of the time series. Defaults to 0. Integers 0-8 are accepted.
+  0 = SMA. 1 = EMA. 2 = WMA. 3 = DEMA. 4 = TEMA. 5 = TRIMA. 6 = T3. 7 = KAMA. 8 = MAMA
+  * `datatype` - `:map | :json | :csv` specifies the return format. Defaults to :map
+  """
+  def bbands(symbol, interval, time_period, series_type, opts \\ []) do
+    type_1_function(:bbands, symbol, interval, time_period, series_type, opts)
   end
 
   @doc """
@@ -555,16 +611,15 @@ defmodule Vantagex.TechnicalIndicators do
   You can pass in a number to specify minutes (e.g. 1 == "1min"), or specify the period with the
   strings known by Alpha Vantage `(:daily | :weekly | :monthly)`
   * `time_period` - Number of data points to calculate each moving average value. Should be a positive integer
+  * `series_type` - The desired price type in the time series. Four types are supported: `:close`, `:open`, `:high`, `:low`.
   * `opts` - A list of extra options to pass to the function
 
   Allowed options:
 
-  * `series_type` - The desired price type in the time series. Four types are supported: `:close`, `:open`, `:high`, `:low`.
-  Defaults to `:close`.
   * `datatype` - `:map | :json | :csv` specifies the return format. Defaults to :map
   """
-  def midpoint(symbol, interval, time_period, opts \\ []) do
-    type_1_function(:midpoint, symbol, interval, time_period, opts)
+  def midpoint(symbol, interval, time_period, series_type, opts \\ []) do
+    type_1_function(:midpoint, symbol, interval, time_period, series_type, opts)
   end
 
   @doc """
@@ -577,7 +632,7 @@ defmodule Vantagex.TechnicalIndicators do
   * `interval` - Interval between two consecutive data points in the time series.
   You can pass in a number to specify minutes (e.g. 1 == "1min"), or specify the period with the
   strings known by Alpha Vantage `(:daily | :weekly | :monthly)`
-  * `time_period` - Number of data points to calculate each moving average value. Should be a positive integer
+  * `time_period` - Number of data points to calculate each midprice value. Should be a positive integer
   * `opts` - A list of extra options to pass to the function
 
   Allowed options:
@@ -585,7 +640,7 @@ defmodule Vantagex.TechnicalIndicators do
   * `datatype` - `:map | :json | :csv` specifies the return format. Defaults to :map
   """
   def midprice(symbol, interval, time_period, opts \\ []) do
-    type_1_function(:midprice, symbol, interval, time_period, opts)
+    type_2_function(:midprice, symbol, interval, time_period, opts)
   end
 
   @doc """
@@ -606,7 +661,7 @@ defmodule Vantagex.TechnicalIndicators do
   * `datatype` - `:map | :json | :csv` specifies the return format. Defaults to :map
   """
   def atr(symbol, interval, time_period, opts \\ []) do
-    type_1_function(:atr, symbol, interval, time_period, opts)
+    type_2_function(:atr, symbol, interval, time_period, opts)
   end
 
   @doc """
@@ -627,17 +682,31 @@ defmodule Vantagex.TechnicalIndicators do
   * `datatype` - `:map | :json | :csv` specifies the return format. Defaults to :map
   """
   def natr(symbol, interval, time_period, opts \\ []) do
-    type_1_function(:natr, symbol, interval, time_period, opts)
+    type_2_function(:natr, symbol, interval, time_period, opts)
   end
 
-  defp type_1_function(func, symbol, interval, time_period, opts) do
+  defp type_1_function(func, symbol, interval, time_period, series_type, opts) do
+    params =
+      %{
+        symbol: symbol,
+        interval: parse_interval(interval),
+        time_period: time_period,
+        series_type: series_type
+      }
+      |> Map.merge(Map.new(opts))
+      |> clean_params()
+
+    resolve_request(func, params)
+  end
+
+  defp type_2_function(func, symbol, interval, time_period, opts) do
     params = %{
       symbol: symbol,
       interval: parse_interval(interval),
-      time_period: time_period,
-      series_type: parse_series_type(Keyword.get(opts, :series_type)),
-      datatype: Keyword.get(opts, :datatype)
-    } |> clean_params()
+      time_period: time_period
+    }
+    |> Map.merge(Map.new(opts))
+    |> clean_params()
 
     resolve_request(func, params)
   end
