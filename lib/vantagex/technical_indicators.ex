@@ -121,6 +121,60 @@ defmodule Vantagex.TechnicalIndicators do
   def t3(symbol, interval, time_period, series_type, opts \\ []), do: tema(symbol, interval, time_period, series_type, opts)
 
   @doc """
+  Uses Alpha Vantage's MACD function.
+  Returns the moving average convergence / divergence (MACD) values.
+
+  Args:
+
+  * `symbol` - The name of the security of your choice. E.g. `MSFT`
+  * `interval` - Interval between two consecutive data points in the time series.
+  You can pass in a number to specify minutes (e.g. 1 == "1min"), or specify the period with the
+  strings known by Alpha Vantage `(:daily | :weekly | :monthly)`
+  * `series_type` - The desired price type in the time series. Four types are supported: `:close`, `:open`, `:high`, `:low`.
+  * `opts` - A list of extra options to pass to the function
+
+  Allowed options:
+
+  * `fastperiod` - positive integers are accepted. Defaults to 12
+  * `slowperiod` - positive integers are accepted. Defaults to 26
+  * `signalperiod` - positive integers are accepted. Defaults to 9
+  * `datatype` - `:map | :json | :csv` specifies the return format. Defaults to :map
+  """
+  def macd(symbol, interval, series_type, opts \\ []) do
+    type_3_function(:macd, symbol, interval, series_type, opts)
+  end
+
+  @doc """
+  Uses Alpha Vantage's MACDEXT function.
+  Returns the moving average convergence / divergence (MACDEXT) values with controllable moving average type.
+
+  Args:
+
+  * `symbol` - The name of the security of your choice. E.g. `MSFT`
+  * `interval` - Interval between two consecutive data points in the time series.
+  You can pass in a number to specify minutes (e.g. 1 == "1min"), or specify the period with the
+  strings known by Alpha Vantage `(:daily | :weekly | :monthly)`
+  * `series_type` - The desired price type in the time series. Four types are supported: `:close`, `:open`, `:high`, `:low`.
+  * `opts` - A list of extra options to pass to the function
+
+  Allowed options:
+
+  * `fastperiod` - positive integers are accepted. Defaults to 12
+  * `slowperiod` - positive integers are accepted. Defaults to 26
+  * `signalperiod` - positive integers are accepted. Defaults to 9
+  * `fastmatype` - moving average type for the faster moving average. Defaults to 0. Integers 0-8 accepted.
+  MA_TYPES_MAPPING
+  * `slowmatype` - moving average type for the slower moving average. Defaults to 0. Integers 0-8 accepted.
+  MA_TYPES_MAPPING
+  * `signalmatype` - moving average type for the signal moving average. Defaults to 0. Integers 0-8 accepted.
+  MA_TYPES_MAPPING
+  * `datatype` - `:map | :json | :csv` specifies the return format. Defaults to :map
+  """
+  def macdext(symbol, interval, series_type, opts \\ []) do
+    type_3_function(:macdext, symbol, interval, series_type, opts)
+  end
+
+  @doc """
   Uses Alpha Vantage's TRIMA function.
   Returns the triangular moving average (TRIMA) values.
 
@@ -162,6 +216,29 @@ defmodule Vantagex.TechnicalIndicators do
   """
   def kama(symbol, interval, time_period, series_type, opts \\ []) do
     type_1_function(:kama, symbol, interval, time_period, series_type, opts)
+  end
+
+  @doc """
+  Uses Alpha Vantage's MAMA function.
+  Returns the MESA adaptive moving average (MAMA) values.
+
+  Args:
+
+  * `symbol` - The name of the security of your choice. E.g. `MSFT`
+  * `interval` - Interval between two consecutive data points in the time series.
+  You can pass in a number to specify minutes (e.g. 1 == "1min"), or specify the period with the
+  strings known by Alpha Vantage `(:daily | :weekly | :monthly)`
+  * `series_type` - The desired price type in the time series. Four types are supported: `:close`, `:open`, `:high`, `:low`.
+  * `opts` - A list of extra options to pass to the function
+
+  Allowed options:
+
+  * `fastlimit` - positive floats are accepted. Defaults to 0.01
+  * `slowlimit` - positive floats are accepted. Defaults to 0.01
+  * `datatype` - `:map | :json | :csv` specifies the return format. Defaults to :map
+  """
+  def mama(symbol, interval, series_type, opts \\ []) do
+    type_3_function(:mama, symbol, interval, series_type, opts)
   end
 
   @doc """
@@ -273,6 +350,56 @@ defmodule Vantagex.TechnicalIndicators do
   """
   def adxr(symbol, interval, time_period, opts \\ []) do
     type_2_function(:adxr, symbol, interval, time_period, opts)
+  end
+
+  @doc """
+  Uses Alpha Vantage's APO function.
+  Returns the absolute price oscillator (APO) values.
+
+  Args:
+
+  * `symbol` - The name of the security of your choice. E.g. `MSFT`
+  * `interval` - Interval between two consecutive data points in the time series.
+  You can pass in a number to specify minutes (e.g. 1 == "1min"), or specify the period with the
+  strings known by Alpha Vantage `(:daily | :weekly | :monthly)`
+  * `series_type` - The desired price type in the time series. Four types are supported: `:close`, `:open`, `:high`, `:low`.
+  * `opts` - A list of extra options to pass to the function
+
+  Allowed options:
+
+  * `fastperiod` - positive integers are accepted. Defaults to 12
+  * `slowperiod` - positive integers are accepted. Defaults to 26
+  * `matype` - Moving average type. Defaults to 0. Integers 0-8 are accepted.
+  MA_TYPES_MAPPING
+  * `datatype` - `:map | :json | :csv` specifies the return format. Defaults to :map
+  """
+  def apo(symbol, interval, series_type, opts \\ []) do
+    type_3_function(:apo, symbol, interval, series_type, opts)
+  end
+
+  @doc """
+  Uses Alpha Vantage's PPO function.
+  Returns the percentage price oscillator (PPO) values.
+
+  Args:
+
+  * `symbol` - The name of the security of your choice. E.g. `MSFT`
+  * `interval` - Interval between two consecutive data points in the time series.
+  You can pass in a number to specify minutes (e.g. 1 == "1min"), or specify the period with the
+  strings known by Alpha Vantage `(:daily | :weekly | :monthly)`
+  * `series_type` - The desired price type in the time series. Four types are supported: `:close`, `:open`, `:high`, `:low`.
+  * `opts` - A list of extra options to pass to the function
+
+  Allowed options:
+
+  * `fastperiod` - positive integers are accepted. Defaults to 12
+  * `slowperiod` - positive integers are accepted. Defaults to 26
+  * `matype` - Moving average type. Defaults to 0. Integers 0-8 are accepted.
+  MA_TYPES_MAPPING
+  * `datatype` - `:map | :json | :csv` specifies the return format. Defaults to :map
+  """
+  def ppo(symbol, interval, series_type, opts \\ []) do
+    type_3_function(:ppo, symbol, interval, series_type, opts)
   end
 
   @doc """
@@ -685,6 +812,132 @@ defmodule Vantagex.TechnicalIndicators do
     type_2_function(:natr, symbol, interval, time_period, opts)
   end
 
+  @doc """
+  Uses Alpha Vantage's HT_TRENDLINE function.
+  Returns the Hilbert transform, instantaneous trendline (HT_TRENDLINE) values.
+
+  Args:
+
+  * `symbol` - The name of the security of your choice. E.g. `MSFT`
+  * `interval` - Interval between two consecutive data points in the time series.
+  You can pass in a number to specify minutes (e.g. 1 == "1min"), or specify the period with the
+  strings known by Alpha Vantage `(:daily | :weekly | :monthly)`
+  * `series_type` - The desired price type in the time series. Four types are supported: `:close`, `:open`, `:high`, `:low`.
+  * `opts` - A list of extra options to pass to the function
+
+  Allowed options:
+
+  * `datatype` - `:map | :json | :csv` specifies the return format. Defaults to :map
+  """
+  def ht_trendline(symbol, interval, series_type, opts \\ []) do
+    type_3_function(:ht_trendline, symbol, interval, series_type, opts)
+  end
+
+  @doc """
+  Uses Alpha Vantage's HT_SINE function.
+  Returns the Hilbert transform, sine wave (HT_SINE) values.
+
+  Args:
+
+  * `symbol` - The name of the security of your choice. E.g. `MSFT`
+  * `interval` - Interval between two consecutive data points in the time series.
+  You can pass in a number to specify minutes (e.g. 1 == "1min"), or specify the period with the
+  strings known by Alpha Vantage `(:daily | :weekly | :monthly)`
+  * `series_type` - The desired price type in the time series. Four types are supported: `:close`, `:open`, `:high`, `:low`.
+  * `opts` - A list of extra options to pass to the function
+
+  Allowed options:
+
+  * `datatype` - `:map | :json | :csv` specifies the return format. Defaults to :map
+  """
+  def ht_sine(symbol, interval, series_type, opts \\ []) do
+    type_3_function(:ht_sine, symbol, interval, series_type, opts)
+  end
+
+  @doc """
+  Uses Alpha Vantage's HT_TRENDMODE function.
+  Returns the Hilbert transform, trend vs cycle mode (HT_TRENDMODE) values.
+
+  Args:
+
+  * `symbol` - The name of the security of your choice. E.g. `MSFT`
+  * `interval` - Interval between two consecutive data points in the time series.
+  You can pass in a number to specify minutes (e.g. 1 == "1min"), or specify the period with the
+  strings known by Alpha Vantage `(:daily | :weekly | :monthly)`
+  * `series_type` - The desired price type in the time series. Four types are supported: `:close`, `:open`, `:high`, `:low`.
+  * `opts` - A list of extra options to pass to the function
+
+  Allowed options:
+
+  * `datatype` - `:map | :json | :csv` specifies the return format. Defaults to :map
+  """
+  def ht_trendmode(symbol, interval, series_type, opts \\ []) do
+    type_3_function(:ht_trendmode, symbol, interval, series_type, opts)
+  end
+
+  @doc """
+  Uses Alpha Vantage's HT_DCPERIOD function.
+  Returns the Hilbert transform, dominant cycle period (HT_DCPERIOD) values.
+
+  Args:
+
+  * `symbol` - The name of the security of your choice. E.g. `MSFT`
+  * `interval` - Interval between two consecutive data points in the time series.
+  You can pass in a number to specify minutes (e.g. 1 == "1min"), or specify the period with the
+  strings known by Alpha Vantage `(:daily | :weekly | :monthly)`
+  * `series_type` - The desired price type in the time series. Four types are supported: `:close`, `:open`, `:high`, `:low`.
+  * `opts` - A list of extra options to pass to the function
+
+  Allowed options:
+
+  * `datatype` - `:map | :json | :csv` specifies the return format. Defaults to :map
+  """
+  def ht_dcperiod(symbol, interval, series_type, opts \\ []) do
+    type_3_function(:ht_dcperiod, symbol, interval, series_type, opts)
+  end
+
+  @doc """
+  Uses Alpha Vantage's HT_DCPHASE function.
+  Returns the Hilbert transform, dominant cycle phase (HT_DCPHASE) values.
+
+  Args:
+
+  * `symbol` - The name of the security of your choice. E.g. `MSFT`
+  * `interval` - Interval between two consecutive data points in the time series.
+  You can pass in a number to specify minutes (e.g. 1 == "1min"), or specify the period with the
+  strings known by Alpha Vantage `(:daily | :weekly | :monthly)`
+  * `series_type` - The desired price type in the time series. Four types are supported: `:close`, `:open`, `:high`, `:low`.
+  * `opts` - A list of extra options to pass to the function
+
+  Allowed options:
+
+  * `datatype` - `:map | :json | :csv` specifies the return format. Defaults to :map
+  """
+  def ht_dcphase(symbol, interval, series_type, opts \\ []) do
+    type_3_function(:ht_dcphase, symbol, interval, series_type, opts)
+  end
+
+  @doc """
+  Uses Alpha Vantage's HT_PHASOR function.
+  Returns the Hilbert transform, phasor components (HT_PHASOR) values.
+
+  Args:
+
+  * `symbol` - The name of the security of your choice. E.g. `MSFT`
+  * `interval` - Interval between two consecutive data points in the time series.
+  You can pass in a number to specify minutes (e.g. 1 == "1min"), or specify the period with the
+  strings known by Alpha Vantage `(:daily | :weekly | :monthly)`
+  * `series_type` - The desired price type in the time series. Four types are supported: `:close`, `:open`, `:high`, `:low`.
+  * `opts` - A list of extra options to pass to the function
+
+  Allowed options:
+
+  * `datatype` - `:map | :json | :csv` specifies the return format. Defaults to :map
+  """
+  def ht_phasor(symbol, interval, series_type, opts \\ []) do
+    type_3_function(:ht_phasor, symbol, interval, series_type, opts)
+  end
+
   defp type_1_function(func, symbol, interval, time_period, series_type, opts) do
     params =
       %{
@@ -704,6 +957,18 @@ defmodule Vantagex.TechnicalIndicators do
       symbol: symbol,
       interval: parse_interval(interval),
       time_period: time_period
+    }
+    |> Map.merge(Map.new(opts))
+    |> clean_params()
+
+    resolve_request(func, params)
+  end
+
+  defp type_3_function(func, symbol, interval, series_type, opts) do
+    params = %{
+      symbol: symbol,
+      interval: parse_interval(interval),
+      series_type: series_type
     }
     |> Map.merge(Map.new(opts))
     |> clean_params()
