@@ -175,6 +175,57 @@ defmodule Vantagex.TechnicalIndicators do
   end
 
   @doc """
+  Uses Alpha Vantage's STOCH function.
+  Returns the stochastic oscillator (STOCH) values.
+
+  Args:
+
+  * `symbol` - The name of the security of your choice. E.g. `MSFT`
+  * `interval` - Interval between two consecutive data points in the time series.
+  You can pass in a number to specify minutes (e.g. 1 == "1min"), or specify the period with the
+  strings known by Alpha Vantage `(:daily | :weekly | :monthly)`
+  * `opts` - A list of extra options to pass to the function
+
+  Allowed options:
+
+  * `fastkperiod` - The time period of the fastk moving average. Positive integers are accepted. Defaults to 5
+  * `slowkperiod` - The time period of the slowk moving average. Positive integers are accepted. Defaults to 3
+  * `slowdperiod` - The time period of the slowd moving average. Positive integers are accepted. Defaults to 3
+  * `slowkmatype` - Moving average type for the slowk moving average. Defaults to 0. Integers 0-8 accepted.
+  MA_TYPES_MAPPING
+  * `slowdmatype` - Moving average type for the slowd moving average. Defaults to 0. Integers 0-8 accepted.
+  MA_TYPES_MAPPING
+  * `datatype` - `:map | :json | :csv` specifies the return format. Defaults to :map
+  """
+  def stoch(symbol, interval, opts \\ []) do
+    type_4_function(:stoch, symbol, interval, opts)
+  end
+
+  @doc """
+  Uses Alpha Vantage's STOCHF function.
+  Returns the stochastic fast (STOCHF) values with controllable moving average type.
+
+  Args:
+
+  * `symbol` - The name of the security of your choice. E.g. `MSFT`
+  * `interval` - Interval between two consecutive data points in the time series.
+  You can pass in a number to specify minutes (e.g. 1 == "1min"), or specify the period with the
+  strings known by Alpha Vantage `(:daily | :weekly | :monthly)`
+  * `opts` - A list of extra options to pass to the function
+
+  Allowed options:
+
+  * `fastkperiod` - The time period of the fastk moving average. Positive integers are accepted. Defaults to 5
+  * `fastdperiod` - The time period of the fastd moving average. Positive integers are accepted. Defaults to 3
+  * `fastdmatype` - Moving average type for the fastd moving average. Defaults to 0. Integers 0-8 accepted.
+  MA_TYPES_MAPPING
+  * `datatype` - `:map | :json | :csv` specifies the return format. Defaults to :map
+  """
+  def stochf(symbol, interval, opts \\ []) do
+    type_4_function(:stochf, symbol, interval, opts)
+  end
+
+  @doc """
   Uses Alpha Vantage's TRIMA function.
   Returns the triangular moving average (TRIMA) values.
 
@@ -239,6 +290,25 @@ defmodule Vantagex.TechnicalIndicators do
   """
   def mama(symbol, interval, series_type, opts \\ []) do
     type_3_function(:mama, symbol, interval, series_type, opts)
+  end
+
+  @doc """
+  Uses Alpha Vantage's VWAP function.
+  Returns the volume weighted average price (VWAP) for intraday time series.
+
+  Args:
+
+  * `symbol` - The name of the security of your choice. E.g. `MSFT`
+  * `interval` - Interval between two consecutive data points in the time series.
+  You can pass in a number to specify minutes (e.g. 1 == "1min"). Supported values: 1, 5, 15, 30, 60.
+  * `opts` - A list of extra options to pass to the function
+
+  Allowed options:
+
+  * `datatype` - `:map | :json | :csv` specifies the return format. Defaults to :map
+  """
+  def vwap(symbol, interval, opts \\ []) do
+    type_4_function(:vwap, symbol, interval, opts)
   end
 
   @doc """
@@ -425,6 +495,26 @@ defmodule Vantagex.TechnicalIndicators do
   end
 
   @doc """
+  Uses Alpha Vantage's BOP function.
+  Returns the balance of power (BOP) values with controllable moving average type.
+
+  Args:
+
+  * `symbol` - The name of the security of your choice. E.g. `MSFT`
+  * `interval` - Interval between two consecutive data points in the time series.
+  You can pass in a number to specify minutes (e.g. 1 == "1min"), or specify the period with the
+  strings known by Alpha Vantage `(:daily | :weekly | :monthly)`
+  * `opts` - A list of extra options to pass to the function
+
+  Allowed options:
+
+  * `datatype` - `:map | :json | :csv` specifies the return format. Defaults to :map
+  """
+  def bop(symbol, interval, opts \\ []) do
+    type_4_function(:bop, symbol, interval, opts)
+  end
+
+  @doc """
   Uses Alpha Vantage's CCI function.
   Returns the commodity channel index (CCI) values.
 
@@ -594,6 +684,29 @@ defmodule Vantagex.TechnicalIndicators do
   """
   def trix(symbol, interval, time_period, series_type, opts \\ []) do
     type_1_function(:trix, symbol, interval, time_period, series_type, opts)
+  end
+
+  @doc """
+  Uses Alpha Vantage's ULTOSC function.
+  Returns the ultimate oscillator (ULTOSC) values.
+
+  Args:
+
+  * `symbol` - The name of the security of your choice. E.g. `MSFT`
+  * `interval` - Interval between two consecutive data points in the time series.
+  You can pass in a number to specify minutes (e.g. 1 == "1min"), or specify the period with the
+  strings known by Alpha Vantage `(:daily | :weekly | :monthly)`
+  * `opts` - A list of extra options to pass to the function
+
+  Allowed options:
+
+  * `timeperiod1` - The first time period of the indicator. Positive integers are accepted. Defaults to 7
+  * `timeperiod2` - The second time period of the indicator. Positive integers are accepted. Defaults to 14
+  * `timeperiod3` - The third time period of indicator. Positive integers are accepted. Defaults to 28
+  * `datatype` - `:map | :json | :csv` specifies the return format. Defaults to :map
+  """
+  def ultosc(symbol, interval, opts \\ []) do
+    type_4_function(:ultosc, symbol, interval, opts)
   end
 
   @doc """
@@ -771,6 +884,48 @@ defmodule Vantagex.TechnicalIndicators do
   end
 
   @doc """
+  Uses Alpha Vantage's SAR function.
+  Returns the parabolic SAR (SAR) values.
+
+  Args:
+
+  * `symbol` - The name of the security of your choice. E.g. `MSFT`
+  * `interval` - Interval between two consecutive data points in the time series.
+  You can pass in a number to specify minutes (e.g. 1 == "1min"), or specify the period with the
+  strings known by Alpha Vantage `(:daily | :weekly | :monthly)`
+  * `opts` - A list of extra options to pass to the function
+
+  Allowed options:
+
+  * `acceleration` - The acceleration factor. Positive floats are accepted. Defaults to 0.01
+  * `maximum` - The acceleration factor maximum value. Positive floats are accepted. Defaults to 0.20
+  * `datatype` - `:map | :json | :csv` specifies the return format. Defaults to :map
+  """
+  def sar(symbol, interval, opts \\ []) do
+    type_4_function(:sar, symbol, interval, opts)
+  end
+
+  @doc """
+  Uses Alpha Vantage's TRANGE function.
+  Returns the true range (TRANGE) values.
+
+  Args:
+
+  * `symbol` - The name of the security of your choice. E.g. `MSFT`
+  * `interval` - Interval between two consecutive data points in the time series.
+  You can pass in a number to specify minutes (e.g. 1 == "1min"), or specify the period with the
+  strings known by Alpha Vantage `(:daily | :weekly | :monthly)`
+  * `opts` - A list of extra options to pass to the function
+
+  Allowed options:
+
+  * `datatype` - `:map | :json | :csv` specifies the return format. Defaults to :map
+  """
+  def trange(symbol, interval, opts \\ []) do
+    type_4_function(:trange, symbol, interval, opts)
+  end
+
+  @doc """
   Uses Alpha Vantage's ATR function.
   Returns the average true range (ATR) values.
 
@@ -810,6 +965,68 @@ defmodule Vantagex.TechnicalIndicators do
   """
   def natr(symbol, interval, time_period, opts \\ []) do
     type_2_function(:natr, symbol, interval, time_period, opts)
+  end
+
+  @doc """
+  Uses Alpha Vantage's AD function.
+  Returns the Chaikin A/D line (AD) values.
+
+  Args:
+
+  * `symbol` - The name of the security of your choice. E.g. `MSFT`
+  * `interval` - Interval between two consecutive data points in the time series.
+  You can pass in a number to specify minutes (e.g. 1 == "1min"), or specify the period with the
+  strings known by Alpha Vantage `(:daily | :weekly | :monthly)`
+  * `opts` - A list of extra options to pass to the function
+
+  Allowed options:
+
+  * `datatype` - `:map | :json | :csv` specifies the return format. Defaults to :map
+  """
+  def ad(symbol, interval, opts \\ []) do
+    type_4_function(:ad, symbol, interval, opts)
+  end
+
+  @doc """
+  Uses Alpha Vantage's ADOSC function.
+  Returns the Chaikin A/D oscillator (ADOSC) values.
+
+  Args:
+
+  * `symbol` - The name of the security of your choice. E.g. `MSFT`
+  * `interval` - Interval between two consecutive data points in the time series.
+  You can pass in a number to specify minutes (e.g. 1 == "1min"), or specify the period with the
+  strings known by Alpha Vantage `(:daily | :weekly | :monthly)`
+  * `opts` - A list of extra options to pass to the function
+
+  Allowed options:
+
+  * `fastperiod` - The time period of the fast EMA. Positive integers are accepted. Defaults to 3.
+  * `slowperiod` - The time period of the slow EMA. Positive integers are accepted. Defaults to 10.
+  * `datatype` - `:map | :json | :csv` specifies the return format. Defaults to :map
+  """
+  def adosc(symbol, interval, opts \\ []) do
+    type_4_function(:adosc, symbol, interval, opts)
+  end
+
+  @doc """
+  Uses Alpha Vantage's OBV function.
+  Returns the on balance volume (OBV) values.
+
+  Args:
+
+  * `symbol` - The name of the security of your choice. E.g. `MSFT`
+  * `interval` - Interval between two consecutive data points in the time series.
+  You can pass in a number to specify minutes (e.g. 1 == "1min"), or specify the period with the
+  strings known by Alpha Vantage `(:daily | :weekly | :monthly)`
+  * `opts` - A list of extra options to pass to the function
+
+  Allowed options:
+
+  * `datatype` - `:map | :json | :csv` specifies the return format. Defaults to :map
+  """
+  def obv(symbol, interval, opts \\ []) do
+    type_4_function(:obv, symbol, interval, opts)
   end
 
   @doc """
@@ -969,6 +1186,17 @@ defmodule Vantagex.TechnicalIndicators do
       symbol: symbol,
       interval: parse_interval(interval),
       series_type: series_type
+    }
+    |> Map.merge(Map.new(opts))
+    |> clean_params()
+
+    resolve_request(func, params)
+  end
+
+  def type_4_function(func, symbol, interval, opts) do
+    params = %{
+      symbol: symbol,
+      interval: parse_interval(interval)
     }
     |> Map.merge(Map.new(opts))
     |> clean_params()
