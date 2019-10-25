@@ -215,9 +215,7 @@ datatype and outputsize, just like TimeSeries.
 
 You can call Alpha Vantage's techincal indicators functions usint the `Vantagex.TechnicalIndicators` module.
 
-All of the functions under these module take all of the API parameters that are required ## Thenical Indicators functions
-
-You can call Alpha Vantage's techincal indicators functions usint the `Vantagex.TechnicalIndicators` module.
+All of the functions under these module take all of the API parameters that are required.
 
 All of the functions under these module take as arguments, all of the API parameters that are required, and an additional `opts` keyword list which can be used to pass extra parameters available to the functions.
 
