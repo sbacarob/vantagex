@@ -14,7 +14,7 @@ Here's the complete (desired) list of features. Checked items are the ones alrea
 - [x] Dedicated module for Timeseries functions
 - [x] Dedicated module for Forex functions
 - [x] Dedicated module for the cryptocurrencies functions
-- [ ] Dedicated module for the indicators functions
+- [x] Dedicated module for the indicators functions
 - [ ] 'Watch' option for stocks
 
 ## Installation
@@ -210,6 +210,280 @@ iex> Vantagex.Cryptocurrencies.daily("BTC", "USD")
 
 These functions take the digital or crypto currency and the market, as well as options to set
 datatype and outputsize, just like TimeSeries.
+
+## Technical Indicators functions
+
+You can call Alpha Vantage's techincal indicators functions usint the `Vantagex.TechnicalIndicators` module.
+
+All of the functions under these module take all of the API parameters that are required ## Thenical Indicators functions
+
+You can call Alpha Vantage's techincal indicators functions usint the `Vantagex.TechnicalIndicators` module.
+
+All of the functions under these module take as arguments, all of the API parameters that are required, and an additional `opts` keyword list which can be used to pass extra parameters available to the functions.
+
+So, for instance, if you wanted to call the Bollinger bands API for the close values of the GOOG stock, with daily intervals, and a window of 20, with a standard deviation of 1 both up and down, you would do it like this:
+
+```elixir
+Vantagex.TechnicalIndicators.bbands("GOOG", :daily, 20, :close, nbdevup: 1, nbdevdn: 1)
+```
+
+As you can see in [Alpha Vantage's docs for this function](https://www.alphavantage.co/documentation/#bbands), for this function `symbol`, `interval`, `time_period`, and `series_type` are required parameters, that's why you pass those four values in. And then you have `nbdevup`, `nbdevdn`, `matype`, and `datatype`. It also requires the `function` name and the `apikey`, but those shouldn't be passed in.
+
+This would produce a response like this:
+
+```elixir
+%{
+  "Meta Data" => %{
+    "1: Symbol" => "GOOG",
+    "2: Indicator" => "Bollinger Bands (BBANDS)",
+    "3: Last Refreshed" => "2019-10-25",
+    "4: Interval" => "daily",
+    "5: Time Period" => 20,
+    "6.1: Deviation multiplier for upper band" => 1,
+    "6.2: Deviation multiplier for lower band" => 1,
+    "6.3: MA Type" => 0,
+    "7: Series Type" => "close",
+    "8: Time Zone" => "US/Eastern Time"
+  },
+  "Technical Analysis: BBANDS" => %{
+    "2017-07-13" => %{
+      "Real Lower Band" => "915.9401",
+      "Real Middle Band" => "935.2200",
+      "Real Upper Band" => "954.4999"
+    },
+    "2010-12-07" => %{
+      "Real Lower Band" => "284.9546",
+      "Real Middle Band" => "293.6493",
+      "Real Upper Band" => "302.3441"
+    },
+    "2011-06-30" => %{
+      "Real Lower Band" => "242.0506",
+      "Real Middle Band" => "249.3182",
+      "Real Upper Band" => "256.5859"
+    },
+    "2012-08-03" => %{
+      "Real Lower Band" => "288.5434",
+      "Real Middle Band" => "300.6135",
+      "Real Upper Band" => "312.6835"
+    },
+    "2012-08-23" => %{
+      "Real Lower Band" => "316.3829",
+      "Real Middle Band" => "325.2354",
+      "Real Upper Band" => "334.0880"
+    },
+    "2012-01-17" => %{
+      "Real Lower Band" => "310.1277",
+      "Real Middle Band" => "317.1253",
+      "Real Upper Band" => "324.1230"
+    },
+    "2018-11-12" => %{
+      "Real Lower Band" => "1046.5269",
+      "Real Middle Band" => "1074.0660",
+      "Real Upper Band" => "1101.6051"
+    },
+    "2018-05-29" => %{
+      "Real Lower Band" => "1046.7046",
+      "Real Middle Band" => "1068.5640",
+      "Real Upper Band" => "1090.4234"
+    },
+    "2010-04-09" => %{
+      "Real Lower Band" => "278.2627",
+      "Real Middle Band" => "281.2169",
+      "Real Upper Band" => "284.1711"
+    },
+    "2008-09-22" => %{
+      "Real Lower Band" => "211.8627",
+      "Real Middle Band" => "222.1877",
+      "Real Upper Band" => "232.5126"
+    },
+    "2005-02-22" => %{
+      "Real Lower Band" => "93.2264",
+      "Real Middle Band" => "96.8609",
+      "Real Upper Band" => "100.4954"
+    },
+    "2018-02-20" => %{
+      "Real Lower Band" => "1051.9637",
+      "Real Middle Band" => "1107.7015",
+      "Real Upper Band" => "1163.4393"
+    },
+    "2010-10-18" => %{
+      "Real Lower Band" => "255.0257",
+      "Real Middle Band" => "267.7918",
+      "Real Upper Band" => "280.5578"
+    },
+    "2009-09-25" => %{
+      "Real Lower Band" => "229.3201",
+      "Real Middle Band" => "237.3000",
+      "Real Upper Band" => "245.2800"
+    },
+    "2011-01-18" => %{
+      "Real Lower Band" => "297.9082",
+      "Real Middle Band" => "303.2645",
+      "Real Upper Band" => "308.6209"
+    },
+    "2017-08-09" => %{
+      "Real Lower Band" => "927.5829",
+      "Real Middle Band" => "945.5385",
+      "Real Upper Band" => "963.4941"
+    },
+    "2006-07-12" => %{
+      "Real Lower Band" => "196.2076",
+      "Real Middle Band" => "202.9005",
+      "Real Upper Band" => "209.5933"
+    },
+    "2005-06-27" => %{
+      "Real Lower Band" => "138.7568",
+      "Real Middle Band" => "142.3265",
+      "Real Upper Band" => "145.8963"
+    },
+    "2008-11-17" => %{
+      "Real Lower Band" => "156.5398",
+      "Real Middle Band" => "168.0404",
+      "Real Upper Band" => "179.5410"
+    },
+    "2010-06-30" => %{
+      "Real Lower Band" => "233.5966",
+      "Real Middle Band" => "241.1621",
+      "Real Upper Band" => "248.7276"
+    },
+    "2004-12-08" => %{
+      "Real Lower Band" => "84.3380",
+      "Real Middle Band" => "87.3474",
+      "Real Upper Band" => "90.3567"
+    },
+    "2016-02-16" => %{
+      "Real Lower Band" => "683.8266",
+      "Real Middle Band" => "708.3675",
+      "Real Upper Band" => "732.9084"
+    },
+    "2012-09-26" => %{
+      "Real Lower Band" => "341.9084",
+      "Real Middle Band" => "353.4631",
+      "Real Upper Band" => "365.0179"
+    },
+    "2017-08-04" => %{
+      "Real Lower Band" => "929.6691",
+      "Real Middle Band" => "946.7220",
+      "Real Upper Band" => "963.7749"
+    },
+    "2014-10-30" => %{
+      "Real Lower Band" => "526.2241",
+      "Real Middle Band" => "544.2130",
+      "Real Upper Band" => "562.2019"
+    },
+    "2013-03-15" => %{
+      "Real Lower Band" => "396.6416",
+      "Real Middle Band" => "404.8498",
+      "Real Upper Band" => "413.0580"
+    },
+    "2014-07-29" => %{
+      "Real Lower Band" => "577.0440",
+      "Real Middle Band" => "584.4662",
+      "Real Upper Band" => "591.8885"
+    },
+    "2018-07-23" => %{
+      "Real Lower Band" => "1118.7867",
+      "Real Middle Band" => "1153.0455",
+      "Real Upper Band" => "1187.3043"
+    },
+    "2018-01-24" => %{
+      "Real Lower Band" => "1067.2546",
+      "Real Middle Band" => "1104.5705",
+      "Real Upper Band" => "1141.8864"
+    },
+    "2018-01-03" => %{
+      "Real Lower Band" => "1031.8574",
+      "Real Middle Band" => "1050.5845",
+      "Real Upper Band" => "1069.3116"
+    },
+    "2015-10-09" => %{
+      "Real Lower Band" => "611.4766",
+      "Real Middle Band" => "626.6645",
+      "Real Upper Band" => "641.8524"
+    },
+    "2013-01-10" => %{
+      "Real Lower Band" => "351.1339",
+      "Real Middle Band" => "357.8278",
+      "Real Upper Band" => "364.5216"
+    },
+    "2018-12-06" => %{
+      "Real Lower Band" => "1033.6873",
+      "Real Middle Band" => "1059.0850",
+      "Real Upper Band" => "1084.4827"
+    },
+    "2011-11-02" => %{
+      "Real Lower Band" => "272.3310",
+      "Real Middle Band" => "285.3788",
+      "Real Upper Band" => "298.4267"
+    },
+    "2012-12-05" => %{
+      "Real Lower Band" => "326.1733",
+      "Real Middle Band" => "333.9057",
+      "Real Upper Band" => "341.6381"
+    },
+    "2006-04-03" => %{
+      "Real Lower Band" => "168.2978",
+      "Real Middle Band" => "178.2354",
+      "Real Upper Band" => "188.1731"
+    },
+    "2018-10-09" => %{
+      "Real Lower Band" => "1157.2593",
+      "Real Middle Band" => "1174.5160",
+      "Real Upper Band" => "1191.7727"
+    },
+    "2015-02-25" => %{
+      "Real Lower Band" => "523.1272",
+      "Real Middle Band" => "533.1575",
+      "Real Upper Band" => "543.1878"
+    },
+    "2011-09-12" => %{
+      "Real Lower Band" => "254.9090",
+      "Real Middle Band" => "262.4308",
+      "Real Upper Band" => "269.9527"
+    },
+    "2015-11-18" => %{
+      "Real Lower Band" => "700.9240",
+      "Real Middle Band" => "719.1615",
+      "Real Upper Band" => "737.3990"
+    },
+    "2007-06-22" => %{
+      "Real Lower Band" => "247.7323",
+      "Real Middle Band" => "252.8249",
+      "Real Upper Band" => "257.9174"
+    },
+    "2005-03-15" => %{
+      "Real Lower Band" => "90.0222",
+      "Real Middle Band" => "93.3613",
+      "Real Upper Band" => "96.7005"
+    },
+    "2005-12-16" => %{
+      "Real Lower Band" => "201.9022",
+      "Real Middle Band" => "206.1637",
+      "Real Upper Band" => "210.4253"
+    },
+    "2011-12-05" => %{
+      "Real Lower Band" => "290.1793",
+      "Real Middle Band" => "298.5353",
+      "Real Upper Band" => "306.8912"
+    },
+    "2005-07-19" => %{
+      "Real Lower Band" => "144.7881",
+      "Real Middle Band" => "147.5178",
+      "Real Upper Band" => "150.2475"
+    },
+    "2011-02-24" => %{
+      "Real Lower Band" => "302.6647",
+      "Real Middle Band" => "306.7161",
+      ...
+    },
+    "2006-07-06" => %{"Real Lower Band" => "192.7600", ...},
+    "2013-09-27" => %{...},
+    ...
+  }
+}
+```
+
+You can check the module's or the functions' docs for detailed information on the arguments and optional params of each function.
 
 ## Calling the general API function
 
