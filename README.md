@@ -1,6 +1,6 @@
 # Vantagex
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![Docs](https://img.shields.io/badge/api-docs-green.svg?style=flat)](https://hexdocs.pm/vantagex/0.1.4) [![Hex.pm Version](https://img.shields.io/hexpm/v/vantagex.svg?style=flat)](https://hex.pm/packages/vantagex)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![Docs](https://img.shields.io/badge/api-docs-green.svg?style=flat)](https://hexdocs.pm/vantagex/0.1.5) [![Hex.pm Version](https://img.shields.io/hexpm/v/vantagex.svg?style=flat)](https://hex.pm/packages/vantagex)
 
 #### Elixir wrapper for Alpha Vantage API
 
@@ -213,19 +213,17 @@ datatype and outputsize, just like TimeSeries.
 
 ## Technical Indicators functions
 
-You can call Alpha Vantage's techincal indicators functions usint the `Vantagex.TechnicalIndicators` module.
+You can call Alpha Vantage's techincal indicators functions using the `Vantagex.TechnicalIndicators` module.
 
-All of the functions under these module take all of the API parameters that are required.
+All of the functions under this module take all of the API parameters that are required, and an additional `opts` keyword list which can be used to pass extra parameters available to the functions.
 
-All of the functions under these module take as arguments, all of the API parameters that are required, and an additional `opts` keyword list which can be used to pass extra parameters available to the functions.
-
-So, for instance, if you wanted to call the Bollinger bands API for the close values of the GOOG stock, with daily intervals, and a window of 20, with a standard deviation of 1 both up and down, you would do it like this:
+So, for instance, if you wanted to call the Bollinger bands API for the close values of the `"GOOG"` stock, with `:daily` intervals, and a window of `20`, with a standard deviation of `1` both up and down, you would do it like this:
 
 ```elixir
 Vantagex.TechnicalIndicators.bbands("GOOG", :daily, 20, :close, nbdevup: 1, nbdevdn: 1)
 ```
 
-As you can see in [Alpha Vantage's docs for this function](https://www.alphavantage.co/documentation/#bbands), for this function `symbol`, `interval`, `time_period`, and `series_type` are required parameters, that's why you pass those four values in. And then you have `nbdevup`, `nbdevdn`, `matype`, and `datatype`. It also requires the `function` name and the `apikey`, but those shouldn't be passed in.
+As you can see in [Alpha Vantage's docs for this function](https://www.alphavantage.co/documentation/#bbands), for this function `symbol`, `interval`, `time_period`, and `series_type` are required parameters, that's why you pass those four values in. And then you have `nbdevup`, `nbdevdn`, `matype`, and `datatype` as optional parameters, thus, you pass those in the `opts` list. The `function` name and the `apikey` are also required, but those shouldn't be passed in, since they are already pulled from the config.
 
 This would produce a response like this:
 
@@ -526,7 +524,7 @@ iex> Vantagex.call_api("TIME_SERIES_DAILY", params)
   }
 }
 ```
-> Notice that the result has no particular order. This is of the way maps work in Elixir.
+> Notice that the result has no particular order. This is because of the way maps work in Elixir.
 
 You can pass any of the options allowed by Alpha Vantage to the `params` map. However, if you fail to include one of the required params (Except for `apikey` and `function` which should not be passed in `params`), you'll get an error like this:
 
