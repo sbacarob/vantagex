@@ -38,6 +38,35 @@ defmodule Vantagex.HttpClient do
   end
 
   @doc """
+  Adds the extra supported HTTPoison opts to the request.
+
+  The supported opts are:
+
+  * `:timeout` - the timeout for establishing the connection, in milliseconds. Defaults to 8000
+  * `:recv_timeout` - the timeout for receiving an HTTP response. Defaults to 5000
+  * `:proxy` - from HTTPoison docs: "a proxy to be used for the request; it can be a regular url or a {Host, Port} tuple, or a {:socks5, ProxyHost, ProxyPort} tuple "
+  * `:proxy_auth` - from HTTPoison docs: "proxy authentication {User, Password} tuple"
+
+  All of these options are to be defined in the application configuration, under `:vantagex`. Like:
+
+  ```elixir
+  config :vantagex,
+    api_key: "YOUR_API_KEY",
+    recv_timeout: 30_000 # Sets a 30 second timeout for the requests
+  ```
+  """
+  def process_request_options(options) do
+    options
+    |> Keyword.merge([
+      timeout: get_app_env(:timeout),
+      recv_timeout: get_app_env(:recv_timeout),
+      proxy: get_app_env(:proxy),
+      proxy_auth: get_app_env(:proxy_auth)
+    ])
+    |> Enum.reject(fn {_k, v} -> is_nil(v) end)
+  end
+
+  @doc """
   Issue a request to the API, passing in the given params.
 
   Args:
@@ -57,6 +86,8 @@ defmodule Vantagex.HttpClient do
   end
 
   defp get_api_key do
-    Application.get_env(:vantagex, :api_key)
+    get_app_env(:api_key)
   end
+
+  defp get_app_env(key), do: Application.get_env(:vantagex, key)
 end

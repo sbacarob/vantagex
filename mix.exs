@@ -4,7 +4,7 @@ defmodule Vantagex.Mixfile do
   def project do
     [
       app: :vantagex,
-      version: "0.1.5",
+      version: "0.1.6",
       description: "Elixir wrapper for Alpha Vantage API",
       package: package(),
       elixir: "~> 1.7",
