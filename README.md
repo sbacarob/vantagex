@@ -541,6 +541,27 @@ iex> Vantagex.call_api("TIME_SERIES_QUARTERLY", %{symbol: "GOOG"})
 {:error, "Unknown function: 'TIME_SERIES_QUARTERLY'"}
 ```
 
+## Passing HTTPoison options
+
+Some of the options that HTTPoison allows per request, are allowed to be configured for all requests, not per request.
+
+The supported options are:
+
+* `:timeout` - the timeout for establishing the connection, in milliseconds. Defaults to 8000
+* `:recv_timeout` - the timeout for receiving an HTTP response. Defaults to 5000
+* `:proxy` - from HTTPoison docs: "a proxy to be used for the request; it can be a regular url or a {Host, Port} tuple, or a {:socks5, ProxyHost, ProxyPort} tuple"
+* `:proxy_auth` - from HTTPoison docs: "proxy authentication {User, Password} tuple"
+
+All of these options are to be defined in the application configuration, under `:vantagex`. Like:
+
+```elixir
+config :vantagex,
+  api_key: "YOUR_API_KEY",
+  recv_timeout: 30_000 # Sets a 30 second timeout for the requests
+```
+
+You cand find more about these options in [HTTPoison's docs](https://hexdocs.pm/httpoison/HTTPoison.Request.html)
+
 ## Running the project by itself
 
 To clone and run this project by itself run:
